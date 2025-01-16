@@ -1,0 +1,8 @@
+python datacleaner.py --header 2 --columns "Name, Description, Github, Deck" --input hackathon.xlsx --output my_output.tsv
+
+
+python datacleaner.py --header 2 --columns "Project Name, X / Twitter handle of the Project, Website" --input MVB_9.xlsx --output MVB_9.tsv
+
+
+python batch.py -i my_output.tsv -p hackathon_analysis -sc "Name, Description, Github, Deck" 
+python batch.py -i MVB_9.tsv -p project_analysis -sc "Project Name, X / Twitter handle of the Project, Website" -pn "Project Name"
