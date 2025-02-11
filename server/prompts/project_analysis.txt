@@ -1,0 +1,42 @@
+Analyze the following project and provide a comprehensive evaluation. Your response must follow this exact format:
+
+Summary:
+Provide a clear, concise summary of ${project_name}. Focus on its core value proposition and unique features.
+
+Sustainability of the project's business model analysis (Rate 0-5):
+- Tokenomics and business model:
+[Analyze the project's economic model and sustainability]
+- Problem resolution:
+[Identify unique problems this project solves]
+- Market size:
+[Analyze total addressable market]
+- Go-to-market strategy:
+[Evaluate user acquisition and growth plans]
+
+Innovation of the underlying technology (Rate 0-5):
+- Technical Implementation:
+[Evaluate technical architecture and code quality]
+- User Experience:
+[Assess interface and usability]
+- Innovation Level:
+[Analyze technological uniqueness]
+- Competitive Analysis:
+[Compare with existing solutions]
+
+Overall excellence of the founding team (Rate 0-5):
+- Community Engagement:
+[Evaluate social media presence and community interaction]
+- Team Expertise:
+[Assess team background and experience]
+- Investment Status:
+[Review current investors and funding]
+
+Score:
+[Provide final score out of 15, showing calculation]
+
+Project Details:
+Name: ${project_name}
+Website: ${project_website}
+Description: ${project_description}
+X Account: ${project_x_account}
+Deck: ${project_deck_url}
