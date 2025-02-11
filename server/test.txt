@@ -1,0 +1,12 @@
+curl -X POST http://localhost:3000/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"username": "test", "password": "test123"}'
+
+  curl -X POST http://localhost:3000/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"username": "test", "password": "test123"}'
+
+  curl -X POST http://localhost:3000/api/project/analyze \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJleHAiOjE3MzkzNjQ5ODR9.5gRNxv8-9hrn0YnlROYdViwlS18gBi4Yy16rTQaWA0s" \
+  -H "Content-Type: application/json" \
+  -d @test.json

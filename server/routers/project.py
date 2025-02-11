@@ -1,8 +1,10 @@
 from flask import Blueprint, request, jsonify
 from dataclasses import dataclass
 from services.project_analyzer import analyze_project
+from services.auth import require_auth
 from typing import Optional
 import validators
+import traceback
 
 blueprint = Blueprint('project', __name__)
 
@@ -36,12 +38,13 @@ class ProjectRequest:
         )
 
 @blueprint.route("/analyze", methods=['POST'])
-async def analyze():
+@require_auth
+def analyze():
     try:
         data = request.get_json()
         project_request = ProjectRequest.from_json(data)
         
-        result = await analyze_project(
+        result = analyze_project(
             project_name=project_request.project_name,
             project_website=project_request.project_website,
             project_description=project_request.project_description,
@@ -53,4 +56,6 @@ async def analyze():
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        print(f"Error in /analyze: {str(e)}")
+        print(traceback.format_exc())
+        return jsonify({"error": "An unexpected error occurred", "details": str(e)}), 500

@@ -2,6 +2,7 @@ import google.generativeai as genai
 from typing import List, Dict, Optional
 from dataclasses import dataclass, asdict
 import os, re
+import traceback
 from dotenv import load_dotenv
 from .prompt_manager import PromptManager
 
@@ -59,7 +60,7 @@ def extract_scores(content: str) -> ProjectScores:
         total_score=scores['total']
     )
 
-async def analyze_project(
+def analyze_project(
     project_name: str,
     project_website: str,
     project_description: str,
@@ -95,5 +96,6 @@ async def analyze_project(
         }
 
     except Exception as e:
-        print(f"Error during analysis: {str(e)}")
+        print(f"Error during project analysis: {str(e)}")
+        print(traceback.format_exc())
         raise Exception(f"Failed to analyze project: {str(e)}")
