@@ -9,9 +9,9 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 load_dotenv()
 
-# Try HTTPS first, fallback to HTTP
+# Update base URLs to use port 3443 for HTTPS
 BASE_URL = os.getenv("BASE_URL", "https://localhost:3443/api")
-FALLBACK_URL = BASE_URL.replace("https://", "http://").replace(":3443", ":3000")
+FALLBACK_URL = "http://localhost:3000/api"  # HTTP fallback
 
 def make_request(method, endpoint, data=None, headers=None):
     urls = [BASE_URL, FALLBACK_URL]

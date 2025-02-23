@@ -1,4 +1,4 @@
-import jwt
+import jwt  # Make sure this is PyJWT
 import os
 from datetime import datetime, timedelta
 from functools import wraps
@@ -9,9 +9,8 @@ JWT_SECRET = os.getenv('JWT_SECRET', 'your-secret-key')
 JWT_ALGORITHM = 'HS256'
 
 def generate_token(username: str) -> str:
-    expiration = datetime.utcnow() + timedelta(days=1)
     return jwt.encode(
-        {'username': username, 'exp': expiration},
+        {"username": username, "exp": datetime.utcnow() + timedelta(days=1)},
         JWT_SECRET,
         algorithm=JWT_ALGORITHM
     )
