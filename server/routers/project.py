@@ -1,10 +1,11 @@
-from flask import Blueprint, request, jsonify
+from quart import Blueprint, request, jsonify
 from dataclasses import dataclass
-from services.project_analyzer import analyze_project
+from services.project_analyzer import ProjectAnalyzer
 from services.auth import require_auth
 from typing import Optional
 import validators
 import traceback
+import asyncio
 
 blueprint = Blueprint('project', __name__)
 
@@ -37,25 +38,24 @@ class ProjectRequest:
             analysis_type=data.get('analysis_type')
         )
 
+# Create analyzer instance
+analyzer = ProjectAnalyzer()
+
 @blueprint.route("/analyze", methods=['POST'])
 @require_auth
-def analyze():
+async def analyze():
     try:
-        data = request.get_json()
-        project_request = ProjectRequest.from_json(data)
+        data = await request.get_json()
+        project_data = {
+            "project_name": data.get('project_name'),
+            "project_website": data.get('project_website'),
+            "project_description": data.get('project_description'),
+            "project_x_account": data.get('project_x_account'),
+            "project_deck_url": data.get('project_deck_url'),
+            "analysis_type": data.get('analysis_type')
+        }
         
-        result = analyze_project(
-            project_name=project_request.project_name,
-            project_website=project_request.project_website,
-            project_description=project_request.project_description,
-            project_x_account=project_request.project_x_account,
-            project_deck_url=project_request.project_deck_url,
-            analysis_type=project_request.analysis_type
-        )
+        result = await analyzer.analyze_project(project_data=project_data)
         return jsonify(result)
-    except ValueError as e:
-        return jsonify({"error": str(e)}), 400
     except Exception as e:
-        print(f"Error in /analyze: {str(e)}")
-        print(traceback.format_exc())
-        return jsonify({"error": "An unexpected error occurred", "details": str(e)}), 500
+        return jsonify({"error": str(e)}), 500

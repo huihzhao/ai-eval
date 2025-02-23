@@ -2,7 +2,7 @@ import jwt  # Make sure this is PyJWT
 import os
 from datetime import datetime, timedelta
 from functools import wraps
-from flask import request, jsonify
+from quart import request, jsonify
 from models.user import User, users
 
 JWT_SECRET = os.getenv('JWT_SECRET', 'your-secret-key')
@@ -25,20 +25,18 @@ def verify_token(token: str) -> dict:
 
 def require_auth(f):
     @wraps(f)
-    def decorated(*args, **kwargs):
+    async def decorated(*args, **kwargs):
         token = None
         if 'Authorization' in request.headers:
             token = request.headers['Authorization'].replace('Bearer ', '')
         
         if not token:
-            return jsonify({'message': 'Missing token'}), 401
+            return jsonify({"error": "Token is missing"}), 401
             
         try:
-            payload = verify_token(token)
-            if payload['username'] not in users:
-                raise Exception('User not found')
+            verify_token(token)
+            return await f(*args, **kwargs)
         except Exception as e:
-            return jsonify({'message': str(e)}), 401
+            return jsonify({"error": str(e)}), 401
             
-        return f(*args, **kwargs)
     return decorated
