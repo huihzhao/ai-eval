@@ -1,42 +1,82 @@
-Analyze the following project and provide a comprehensive evaluation. Your response must follow this exact format:
-
-Summary:
-Provide a clear, concise summary of ${project_name}. Focus on its core value proposition and unique features.
-
-Sustainability of the project's business model analysis (Rate 0-5):
-- Tokenomics and business model:
-[Analyze the project's economic model and sustainability]
-- Problem resolution:
-[Identify unique problems this project solves]
-- Market size:
-[Analyze total addressable market]
-- Go-to-market strategy:
-[Evaluate user acquisition and growth plans]
-
-Innovation of the underlying technology (Rate 0-5):
-- Technical Implementation:
-[Evaluate technical architecture and code quality]
-- User Experience:
-[Assess interface and usability]
-- Innovation Level:
-[Analyze technological uniqueness]
-- Competitive Analysis:
-[Compare with existing solutions]
-
-Overall excellence of the founding team (Rate 0-5):
-- Community Engagement:
-[Evaluate social media presence and community interaction]
-- Team Expertise:
-[Assess team background and experience]
-- Investment Status:
-[Review current investors and funding]
-
-Score:
-[Provide final score out of 15, showing calculation]
-
-Project Details:
+Project Overview:
+----------------
 Name: ${project_name}
 Website: ${project_website}
 Description: ${project_description}
-X Account: ${project_x_account}
-Deck: ${project_deck_url}
+Social: ${project_x_account}
+Documentation: ${project_deck_url}
+
+Community Insights (from Grok):
+--------------------------
+Sentiment Score: ${sentiment_score}/1.0
+Recent Activity: ${engagement_metrics}
+Key Concerns: ${key_concerns}
+Recent Incidents: ${recent_incidents}
+
+Please provide a comprehensive project analysis in the following JSON format:
+
+{
+    "final_evaluation": {
+        "total_score": <0-15 float>,
+        "component_scores": {
+            "business_score": <0-5 float>,
+            "technical_score": <0-5 float>,
+            "risk_score": <0-5 float>
+        },
+        "key_metrics": {
+            "tvl": "<USD amount>",
+            "daily_volume": "<USD amount>",
+            "active_users": "<number>"
+        },
+        "technical_aspects": {
+            "architecture": "<string>",
+            "scalability": "<string>",
+            "security_measures": ["<string>"]
+        },
+        "market_analysis": {
+            "current_position": "<string>",
+            "market_size": "<USD amount>",
+            "growth_rate": "<percentage>"
+        },
+        "incident_analysis": {
+            "summary": {
+                "total_incidents": <number>,
+                "severity_distribution": {
+                    "high": <number>,
+                    "medium": <number>,
+                    "low": <number>
+                },
+                "avg_resolution_time": "<string>"
+            },
+            "recent_incidents": [
+                {
+                    "date": "<ISO date>",
+                    "type": "<Security/Performance/Community>",
+                    "severity": "<High/Medium/Low>",
+                    "description": "<string>",
+                    "impact": {
+                        "users_affected": "<number>",
+                        "financial_impact": "<USD amount>",
+                        "reputation_impact": "<High/Medium/Low>"
+                    },
+                    "resolution": {
+                        "status": "<Resolved/In Progress/Planned>",
+                        "time_to_resolve": "<string>",
+                        "measures_taken": ["<string>"]
+                    }
+                }
+            ],
+            "trend_analysis": {
+                "frequency_trend": "<Increasing/Stable/Decreasing>",
+                "severity_trend": "<Increasing/Stable/Decreasing>",
+                "common_patterns": ["<string>"],
+                "effectiveness_of_measures": "<High/Medium/Low>"
+            }
+        },
+        "historical_performance": {
+            "uptime": "<percentage>",
+            "reliability_score": <0-1 float>,
+            "security_score": <0-1 float>
+        }
+    }
+}
